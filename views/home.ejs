@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>URL Shortner</h1>
+    <% if (locals.id) { %>
+    <p>URL Generated: http://localhost:8001/api/url/<%= id %></p>
+    <% } %> 
+    <div>  
+        <form method="post" action="/api/url">
+            <label>
+                Enter Your Original URL:
+            </label>
+            <input type="text" name="url" placeholder="http://www.com"> 
+            <button type="submit">Generate</button>
+        </form> 
+    </div>
+    <% if (locals.url) { %>
+        <table>
+            <thead>
+                <th>S.No.</th>
+                <th>ShortId</th>
+                <th>RedirectUrl</th>
+                <th>Cicks</th>
+            </thead>
+            <tbody>
+                <% url.forEach((element,index)=> { %>
+                    <tr>
+                        <td><%=index+1%></td>
+                        <td><%=element.shortId%></td>
+                        <td><%=element.redirectUrl%></td>
+                        <td><%=element.viewHistory.length%></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } %>
+</body>
+</html>   
